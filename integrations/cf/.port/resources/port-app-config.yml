@@ -1,0 +1,35 @@
+resources:
+  - kind: zone
+    selector:
+      query: 'true'
+    port:
+      entity:
+        mappings:
+          identifier: .id
+          title: '.name'
+          blueprint: '"cloudflare_zone"'
+          properties:
+            created_at: .created_on
+            activated_at: .activated_on
+            account: .account.name
+            plan: .plan.name
+            status: .status
+  - kind: dns_record
+    selector:
+      query: 'true'
+    port:
+      entity:
+        mappings:
+          identifier: .id
+          title: '.name'
+          blueprint: '"cloudflare_dns_record"'
+          properties:
+            type: .type
+            content: .content
+            comment: .comment
+            ttl: .ttl
+            proxiable: .proxiable
+            proxied: .proxied
+            tags: .tags
+          relations:
+            zone: .zone_id

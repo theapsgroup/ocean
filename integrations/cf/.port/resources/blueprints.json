@@ -1,0 +1,104 @@
+[
+    {
+        "identifier": "cloudflare_zone",
+        "title": "Cloudflare Zone",
+        "icon": "Cloudflare",
+        "schema": {
+          "properties": {
+            "created_at": {
+              "type": "string",
+              "title": "Created At",
+              "icon": "Clock",
+              "format": "date-time"
+            },
+            "activated_at": {
+              "type": "string",
+              "title": "Activated At",
+              "icon": "Clock",
+              "format": "date-time"
+            },
+            "account": {
+              "type": "string",
+              "title": "Account"
+            },
+            "plan": {
+              "type": "string",
+              "title": "Plan"
+            },
+            "status": {
+              "title": "Status",
+              "type": "string",
+              "enum": [
+                "initializing",
+                "pending",
+                "active",
+                "moved"
+              ],
+              "enumColors": {
+                "initializing": "lightGray",
+                "pending": "lightGray",
+                "active": "lightGray",
+                "moved": "lightGray"
+              }
+            }
+          },
+          "required": []
+        },
+        "mirrorProperties": {},
+        "calculationProperties": {},
+        "aggregationProperties": {},
+        "relations": {}
+    },
+    {
+      "identifier": "cloudflare_dns_record",
+      "title": "Cloudflare DNS Record",
+      "icon": "Cloudflare",
+      "schema": {
+        "properties": {
+          "content": {
+            "type": "string",
+            "title": "Content"
+          },
+          "type": {
+            "type": "string",
+            "title": "Type"
+          },
+          "comment": {
+            "type": "string",
+            "title": "Comment"
+          },
+          "proxiable": {
+            "type": "boolean",
+            "title": "Proxiable"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Tags"
+          },
+          "ttl": {
+            "type": "number",
+            "title": "TTL"
+          },
+          "proxied": {
+            "type": "boolean",
+            "title": "Proxied"
+          }
+        },
+        "required": []
+      },
+      "mirrorProperties": {},
+      "calculationProperties": {},
+      "aggregationProperties": {},
+      "relations": {
+        "zone": {
+          "title": "Zone",
+          "target": "cloudflare_zone",
+          "required": true,
+          "many": false
+        }
+      }
+    }
+]
