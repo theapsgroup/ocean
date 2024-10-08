@@ -1,104 +1,169 @@
 [
-    {
-        "identifier": "cloudflare_zone",
-        "title": "Cloudflare Zone",
-        "icon": "Cloudflare",
-        "schema": {
-          "properties": {
-            "created_at": {
-              "type": "string",
-              "title": "Created At",
-              "icon": "Clock",
-              "format": "date-time"
-            },
-            "activated_at": {
-              "type": "string",
-              "title": "Activated At",
-              "icon": "Clock",
-              "format": "date-time"
-            },
-            "account": {
-              "type": "string",
-              "title": "Account"
-            },
-            "plan": {
-              "type": "string",
-              "title": "Plan"
-            },
-            "status": {
-              "title": "Status",
-              "type": "string",
-              "enum": [
-                "initializing",
-                "pending",
-                "active",
-                "moved"
-              ],
-              "enumColors": {
-                "initializing": "lightGray",
-                "pending": "lightGray",
-                "active": "lightGray",
-                "moved": "lightGray"
-              }
-            }
-          },
-          "required": []
-        },
-        "mirrorProperties": {},
-        "calculationProperties": {},
-        "aggregationProperties": {},
-        "relations": {}
+  {
+    "identifier": "cloudflareAccount",
+    "title": "Cloudflare Account",
+    "icon": "Cloudflare",
+    "schema": {
+      "properties": {},
+      "required": []
     },
-    {
-      "identifier": "cloudflare_dns_record",
-      "title": "Cloudflare DNS Record",
-      "icon": "Cloudflare",
-      "schema": {
-        "properties": {
-          "content": {
-            "type": "string",
-            "title": "Content"
-          },
-          "type": {
-            "type": "string",
-            "title": "Type"
-          },
-          "comment": {
-            "type": "string",
-            "title": "Comment"
-          },
-          "proxiable": {
-            "type": "boolean",
-            "title": "Proxiable"
-          },
-          "tags": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array",
-            "title": "Tags"
-          },
-          "ttl": {
-            "type": "number",
-            "title": "TTL"
-          },
-          "proxied": {
-            "type": "boolean",
-            "title": "Proxied"
-          }
+    "mirrorProperties": {},
+    "calculationProperties": {},
+    "aggregationProperties": {},
+    "relations": {}
+  },
+  {
+    "identifier": "cloudflareZone",
+    "title": "Cloudflare Zone",
+    "icon": "Cloudflare",
+    "schema": {
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "title": "Created At",
+          "icon": "Clock",
+          "format": "date-time"
         },
-        "required": []
-      },
-      "mirrorProperties": {},
-      "calculationProperties": {},
-      "aggregationProperties": {},
-      "relations": {
-        "zone": {
-          "title": "Zone",
-          "target": "cloudflare_zone",
-          "required": true,
-          "many": false
+        "activated_at": {
+          "type": "string",
+          "title": "Activated At",
+          "icon": "Clock",
+          "format": "date-time"
+        },
+        "plan": {
+          "type": "string",
+          "title": "Plan"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string",
+          "enum": ["initializing", "pending", "active", "moved"],
+          "enumColors": {
+            "initializing": "lightGray",
+            "pending": "lightGray",
+            "active": "lightGray",
+            "moved": "lightGray"
+          }
         }
+      },
+      "required": []
+    },
+    "mirrorProperties": {},
+    "calculationProperties": {},
+    "aggregationProperties": {},
+    "relations": {
+      "account": {
+        "title": "Account",
+        "target": "cloudflareAccount",
+        "required": true,
+        "many": false
       }
     }
+  },
+  {
+    "identifier": "cloudflareDnsRecord",
+    "title": "Cloudflare DNS Record",
+    "icon": "Cloudflare",
+    "schema": {
+      "properties": {
+        "content": {
+          "type": "string",
+          "title": "Content"
+        },
+        "type": {
+          "type": "string",
+          "title": "Type"
+        },
+        "comment": {
+          "type": "string",
+          "title": "Comment"
+        },
+        "proxiable": {
+          "type": "boolean",
+          "title": "Proxiable"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "title": "Tags"
+        },
+        "ttl": {
+          "type": "number",
+          "title": "TTL"
+        },
+        "proxied": {
+          "type": "boolean",
+          "title": "Proxied"
+        }
+      },
+      "required": []
+    },
+    "mirrorProperties": {},
+    "calculationProperties": {},
+    "aggregationProperties": {},
+    "relations": {
+      "zone": {
+        "title": "Zone",
+        "target": "cloudflareZone",
+        "required": true,
+        "many": false
+      }
+    }
+  },
+  {
+    "identifier": "cloudflareZeroTrustTunnel",
+    "title": "Cloudflare Tunnel",
+    "icon": "Cloudflare",
+    "schema": {
+      "properties": {
+        "created_at": {
+          "type": "string",
+          "title": "Created At",
+          "icon": "Clock",
+          "format": "date-time"
+        },
+        "active_inactive_since": {
+          "type": "string",
+          "title": "Active / Inactive Since",
+          "format": "date-time"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string",
+          "enum": [
+            "inactive",
+            "degraded",
+            "healthy",
+            "down"
+          ],
+          "enumColors": {
+            "inactive": "lightGray",
+            "degraded": "yellow",
+            "healthy": "green",
+            "down": "red"
+          }
+        },
+        "remote_config": {
+          "icon": "DefaultProperty",
+          "type": "boolean",
+          "title": "Remote Config",
+          "description": "Is true if the tunnel can be configured from the Zero Trust dashboard"
+        }
+      },
+      "required": []
+    },
+    "mirrorProperties": {},
+    "calculationProperties": {},
+    "aggregationProperties": {},
+    "relations": {
+      "account": {
+        "title": "Account",
+        "target": "cloudflareAccount",
+        "required": true,
+        "many": false
+      }
+    }
+  }
 ]

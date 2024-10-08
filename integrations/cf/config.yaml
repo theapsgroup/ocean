@@ -9,7 +9,7 @@ integration:
   # Can be loaded using environment variable: INTEGRATION_IDENTIFIER or OCEAN__INTEGRATION__IDENTIFIER
   identifier: "{{ from env INTEGRATION_IDENTIFIER }}"
   # These two should match the values in the .port/spec.yaml file
-  type: "exporter"
+  type: "cloudflare"
   config:
     cfApiToken: "{{ from env CF_API_TOKEN }}"
     cfAccountId: "{{ from env CF_ACCOUNT_ID }}"

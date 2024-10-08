@@ -1,4 +1,13 @@
 resources:
+  - kind: account
+    selector:
+      query: 'true'
+    port:
+      entity:
+        mappings:
+          identifier: .id
+          title: '.name'
+          blueprint: '"cloudflareAccount"'
   - kind: zone
     selector:
       query: 'true'
@@ -7,13 +16,14 @@ resources:
         mappings:
           identifier: .id
           title: '.name'
-          blueprint: '"cloudflare_zone"'
+          blueprint: '"cloudflareZone"'
           properties:
             created_at: .created_on
             activated_at: .activated_on
-            account: .account.name
             plan: .plan.name
             status: .status
+          relations:
+            account: .account.id
   - kind: dns_record
     selector:
       query: 'true'
@@ -22,7 +32,7 @@ resources:
         mappings:
           identifier: .id
           title: '.name'
-          blueprint: '"cloudflare_dns_record"'
+          blueprint: '"cloudflareDnsRecord"'
           properties:
             type: .type
             content: .content
@@ -33,3 +43,19 @@ resources:
             tags: .tags
           relations:
             zone: .zone_id
+  - kind: zerotrust_tunnel
+    selector:
+      query: .deleted_at == null
+    port:
+      entity:
+        mappings:
+          identifier: .id
+          title: '.name'
+          blueprint: '"cloudflareZeroTrustTunnel"'
+          properties:
+            created_at: .created_at
+            status: .status
+            active_inactive_since: if .conns_active_at != null then .conns_active_at else .conns_inactive_at end
+            remote_config: .remote_config
+          relations:
+            account: .account_tag

@@ -1,11 +1,15 @@
 description: Cloudflare integration for Port Ocean
 icon: Cookiecutter  # Should be one of the available icons in Port
 features:
-  - type: exporter
+  - type: cloudflare
     section: Under Development  # Should be one of the available sections in Port
     resources:
-      - kind: cf-example-kind
-      # - kind: <ResourceName2>
+      - kind: account
+      - kind: zone
+      - kind: dns_record
+      - kind: zerotrust_access_application
+      - kind: zerotrust_tunnel
+      - kind: zerotrust_tunnel_configuration
 configurations:
   - name: cfApiToken
     required: false
